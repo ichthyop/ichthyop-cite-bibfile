@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="author" lang="en" content="Christophe LETT">
+    <meta name="description" content="Christophe Lett - Mathematical and Computer Modelling in Ecology">
+    <meta name="keywords" content="christophe, lett, christophe lett, lett christophe, IRD, ecological modelling, ichthyoplankton, ichthyop, animal groups, forest, epidemy, individual-based model, cellular automata, dynamical system, dispersal, connectivity">
+    <meta name="robots" content="Index">
+    <meta name="identifier-url" content="https://clett.github.io/">
+
+    <title>Christophe Lett - Mathematical and Computer Modelling in Ecology</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/logo-nav.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"  href="http://en.ird.fr/" target="blank">
+                    <img src="Files/LettIRD_sma.png" alt=""></a>
+            </div>        
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#Ichthyoplankton">Marine dispersal</a>
+                    </li>
+                    <li>
+                        <a href="#AnimalGroups">Animal groups</a>
+                    </li>
+                    <li>
+                        <a href="#Epidemy">Epidemic spread</a>
+                    </li>
+                    <li>
+                        <a href="#Forest">Forest dynamics</a>
+                    </li>
+                    <li>
+                        <a href="#MathematicsComputer">Theoretical ecology</a>
+                    </li> 
+                    <li>
+                        <a href="#Publications">Publications</a>
+                    </li>
+                    <li>
+                        <a href="#Contact">Contact</a>
+                    </li> 
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+            My research focuses on modelling the dynamics of ecological systems, from both theoretical (study of prey-predator or host-parasitoid systems) and more applied (forest, epidemic, fishery) perspectives. I use methods coming from the mathematical (dynamical systems) and computer (cellular automata network, individual-based models) sides of ecological modelling. Since 2003 I am employed by the Institut de Recherche pour le D&eacute;veloppement (<a href="http://en.ird.fr/"  target="_blank">IRD</a>) and presently in the <a href="https://umr-marbec.fr/"  target="_blank">MARBEC</a> research unit.
+            </div>
+        </div>    
+            
+<h3 id="Ichthyoplankton">Marine dispersal and connectivity</h3>
+I am currently coordinating the <a href="https://en.ird.fr/project-imarco-marine-connectivity" target="_blank">GDRI-Sud iMarCo</a>, a research group funded by the IRD on <a href="https://www.youtube.com/watch?v=MowPR5GYqKM" target="_blank">marine connectivity</a>. This research group constitutes the African component of the international <a href="https://wwz.ifremer.fr/gdrmarco/" target="_blank">GDRI iMarCo</a> group. It gathers researchers and PhD students from several African countries (Algeria, Cote d'Ivoire, Djibouti, Mozambique, Senegal, South Africa, Tunisia) with various scientific expertise in genetics, otolithometry, and modelling. From 2010 to 2015 I led the <a href="./compo" target="_blank">COMPO</a> research project on marine population connectivity in New Caledonia. Before this I was involved in the French - South African co-operation research program IDYLE , that evolved into ECO-UP, a joint program between the IRD and other institutions, mainly University of Cape Town (<a href="http://www.uct.ac.za/" target="_blank">UCT</a>) and Marine &amp; Coastal Management (MCM) in South Africa, Instituto del Mar del Per&uacute; (<a href="http://www.imarpe.pe/imarpe/index.php?id_idioma=EN" target="_blank">IMARPE</a>) in Peru and Institut National de Recherche Halieutique (<a href="http://www.inrh.ma/" target="_blank">INRH</a>) in Morocco. These programs focused on studying the structure and functioning of exploited <a href="http://en.wikipedia.org/wiki/Upwelling" target=" _blank=">upwelling</a> ecosystems. I was in charge of developing models to study how physical (e.g., currents, water temperature) and biological (e.g., growth, mortality) factors affect the dispersal of ichthyoplankton (fish eggs and larvae). This activity resulted in the <a href="http://www.ichthyop.org/" target="_blank">Ichthyop</a> Lagrangian tool. The images below, obtained with this tool, show an example of the dispersal pattern for passive individuals released within five different areas off the South African south coast.
+<br>
+<br>
+<div class="row">
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettIchthyopbis0.png"/>
+<p class="text-center">Release</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettIchthyopbis5.png"/>
+<p class="text-center">After 5 days</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettIchthyopbis10.png"/>
+<p class="text-center">After 10 days</p>
+</div>
+</div>
+
+<h3 id="AnimalGroups">Animal groups in motion</h3>
+Animal groups such as fish schools, bird flocks, insect swarms and mammal herds, have spectacular collective behaviours. Efforts in trying to formalise the basic individual behaviours responsible for animal groups complex dynamics began more than 50 years ago, and since then many models of the dynamics of animal groups have been proposed in the literature. Different approaches have been used in these models, coming from the mathematics, physics, and computer sides of science. In most individual-based models of animal groups, individuals have three types of local interactions with their neighbours, attraction, alignment and repulsion, operating mainly at long, medium and short distances, respectively. The most famous example of it is probably the <a href="http://www.red3d.com/cwr/boids/" target="_blank">Boids</a> computer model.  Another example is the <a href="./Applet/Aquarium/Aquarium.html" target="_blank">Aquarium</a> applet that I found on the Web some time ago (and could not find back, so unfortunately I am not able to acknowledge the author). If interested in such tools you can also visit <a href="http://kewlschool.com/" target="_blank">Cool School</a>.
+<br>
+<br>
+<div class="row">
+<div class="col-md-6">
+<img class="img-responsive center-block" src="./Files/LettSchoolBeforeAttack.png"/>
+<p class="text-center">Simulated group before an attack</p>
+</div>
+<div class="col-md-6">
+<img class="img-responsive center-block" src="./Files/LettSchoolAfterAttack.png"/>
+<p class="text-center">Simulated group after the attack</p>
+</div>
+</div>
+
+<p class="text-center">You can see <a href="https://link.springer.com/article/10.1007%2Fs12080-014-0213-0#Sec15" target="_blank">video files</a> (avi format)</p>
+
+<h3 id="Epidemy">Epidemic spread</h3>
+From November 1999 to September 2000, I had a post-doctoral position at <a href="https://www.dtu.dk/english/About/CAMPUSES/DTU-RISOE-Campus" target="_blank">RIS&Oslash; National Laboratory</a> - Plant Biology and Biogeochemistry Department - Plant Genetics and Epidemiology Programme in Roskilde, Denmark. I developed a model simulating the spatiotemporal spread of plant disease epidemics in cultivar mixtures. The project focused on the dynamics of pathogens attacking cereal cultivars, and more specifically on the dynamics of yellow rust (<i>Puccinia striiformis</i>) in wheat cultivar mixtures.
+<br>
+<br>
+<h4>Example of epidemics spread simulation</h4>
+Space represents a 12 m side square parcel. Initially, one infection is put in the centre of the parcel (image on the left). An infection focus forms (image in the centre), develops, and satellite foci appear (image on the right). Each black pixel represents an infected plant. Each yellow pixel is a non infected plant. On the shown example, the parcel has a density of 400 plants per hectare and there is only one cultivar.
+<br>
+<br>
+<div class="row">
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettPDocIm1.gif"/>
+<p class="text-center">Infection</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettPDocIm2.gif"/>
+<p class="text-center">After 30 days</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettPDocIm3.gif"/>
+<p class="text-center">After 50 days</p>
+</div>
+</div>
+<br>
+You can see the whole simulation in a video file (<a href="./Files/LettPDocAvi.avi" target="_blank">avi</a> format 1 Mb or compressed <a href="./Files/LettPDocAvi.zip" target="_blank">zip</a> format 137 Kb).
+
+<h3 id="Forest">Forest dynamics</h3>
+<img src="./Files/LettAnimGif1.gif" align="right" border="0"  height="180" width="150">
+I defended my Ph.D. thesis in Life Sciences - Ecology on the 3rd of November 1999 at <a href="http://www.unistra.fr/" target="_blank">University of Strasbourg</a>, France. The work was achieved during three years in Laboratoire des Sciences de l'Image, de l'Informatique et de la T&eacute;l&eacute;d&eacute;tection (Image Sciences, Computer Sciences and Remote Sensing Laboratory) - Groupe de Recherches en T&eacute;l&eacute;d&eacute;tection et Spatialisation (Remote Sensing and Spatialisation Research Group), within a pluridisciplinary project associating mathematics, computer sciences and ecology.
+<br>
+<br>
+My Ph.D. fitted into a new project aiming at developing one or several models that enable to answer questions concerning forest communities biodiversity, in
+particular on the factors which favour their species richness. My personal contribution to this project was to study to what extent simulation models of
+forest dynamics could give insights to these questions. My work showed that before using such models for prediction, there were several difficult stages to pass through: choice of the model, choice between different approaches of spatialisation, sensitivity analysis of the parameters and initial conditions, validation towards field data.
+<br>
+<br>
+To get details about this work you can <a href="./Files/Lett1999.pdf" target="_blank">
+download my Ph.D. dissertation</a> (in French, pdf file 2.8 Mb).
+<br>
+<br>
+<h4>Example of forest dynamics simulation</h4>
+The simulated forest ecosystem consists of three groups of species: shade tolerant (in green), shade intolerant (white) and intermediate (yellow) species. The tree crowns are represented by discs within a 50 m side square parcel. Starting from a situation where no individual is present, shade intolerant (light-demanding) species first install (image on the left), then intermediate species succeed (image in the centre), and shade tolerant species finally dominate while other species persist within gaps created by the death of big individuals (image on the right).
+<br>
+<br>
+<div class="row">
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettDocIm1.gif"/>
+<p class="text-center">After 30 years</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettDocIm2.gif"/>
+<p class="text-center">After 150 years</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettDocIm3.gif"/>
+<p class="text-center">After 600 years</p>
+</div>
+</div>
+
+<h3 id="MathematicsComputer">Mathematical and computer modelling</h3>
+The different methods used to build models of population dynamics stand on a large spectrum with, on one side of the spectrum, simple mathematics-based models (using differential equations or matrices) and, on the other side of the spectrum, complex computer-based models (or simulation models, like individual-based models or multi-agent systems). The advantage of the mathematics-based models is that they may be tractable analytically, but they are often considered as over-simplifications of the reality. On the contrary, computer-based models are closer to reality but their dynamics can only be tracked through extensive simulations. There is not much interaction between these two "worlds" of population dynamics modelling. Developing such interactions was one of the objectives of the Mathematical Biology Team in <a href="http://lbbe.univ-lyon1.fr/?lang=en" target="_blank">Laboratoire de Biom&eacute;trie et Biologie Evolutive</a> at <a href="http://www.univ-lyon1.fr" target="_blank">University of Lyon</a>, France, in which I got an Assistant Professor position in September 2000.
+<br>
+<br>
+<h4>Example of the SIRS model</h4>
+One can imagine to build a simulation model simple enough to stay close to a given mathematical model and analyse the conditions under which the two models show similar dynamics. Let's take the example of the SIRS model in epidemiology. We wish to build a spatial version of this model. We can build a computer model where space is discrete, e.g., a grid of square cells. Each cell takes one of three possible states, S (sane, in blue on the images below), I (infected, in red) or R (removed, in green). A cell in state S switches to state I the time step after with a probability equal to the proportion of cells in state I in its neighbourhood. A cell in state I switches to state R with a constant probability. Similarly, a cell in state R switches to state S with a constant probability. The model built this way is a stochastic cellular automata network. This model was implemented using the programming environment <a href="http://cormas.cirad.fr/indexeng.htm" target="_blank">Cormas</a> developed by <a href="http://www.cirad.fr/en" target="_blank">Cirad</a>. The simulation model dynamics converges to a situation where the number of cells in each state remains approximately constant, as predicted by the mathematical model.
+<br>
+<br>
+<div class="row">
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettSIRSIm1.gif"/>
+<p class="text-center">Infection</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettSIRSIm2.gif"/>
+<p class="text-center">After 30 time steps</p>
+</div>
+<div class="col-md-4">
+<img class="img-responsive center-block" src="./Files/LettSIRSIm3.gif"/>
+<p class="text-center">After 100 time steps</p>
+</div>
+</div>
+<br>
+You can see the simulation in a video file (<a href="./Files/LettSIRSAvi.avi" target="_blank">avi</a> format 1 Mb or compressed <a href="./Files/LettSIRSAvi.zip" target="_blank">zip</a> format 128 Kb).
+<br>
+<br>
+The correspondence between the mathematical model dynamics (red curve on the images below) and the computer model dynamics (blue, yellow, black, green and grey curves) improves as the neighbourhood size increases (4, 8, 12, 24 et 48 neighbours on the images below).<br>
+<br>
+<div class="row">
+<div class="col-md-6">
+<img class="img-responsive center-block" src="./Files/LettSIRSIm4eng.gif"/>
+<p class="text-center"></p>
+</div>
+<div class="col-md-6">
+<img class="img-responsive center-block" src="./Files/LettSIRSIm5eng.gif"/>
+<p class="text-center"></p>
+</div>
+</div>
+<h3 id="HostParasitoid">Host-parasitoid and prey-predator systems</h3>
+<h4>Host-parasitoid</h4>
+<img src="./Files/LettAnimGif2.gif" align="right" border="0" height="100" width="100">
+Another way to build the gap between mathematics-based and computer-based models may be to build mathematical models that take more into account individual behaviour than classical models do. This has a cost, the difficulty to get analytical results concerning the resulting complex models. Variables aggregation method is often useful to reduce the dimension of such models, in the case where they involve processes which take place at different temporal scales, for example migratory processes at a fast time scale (daily, weekly) and demographic processes at a slow time scale (monthly, yearly). We adopted this method to reconsider classical host-parasitoid models (like the Nicholson-Bailey model) in a spatial context, with individual migrating from one patch to a neighbouring patch several times within a generation before the parasitism interaction takes place. This study showed that migration, when it is asymmetrical (the parasitoids, principally, should move in a preferred direction), could facilitate the persistence of host-parasitoid interactions. Other studies (Hassell <i>et al.</i> 1991; Comins <i>et al.</i> 1992) suggested that local migration could stabilise host-parasitoid interactions through the emergence of spatiotemporal patterns like spirals (the animation in the margin) or spatial chaos.
+<br>
+<h4>Prey-predator</h4>
+<img src="./Files/LettPuma.jpg" align="left" border="0" height="150" width="200">
+<img src="./Files/LettGazelle.jpg" align="right" border="0" height="150" width="200">
+A lot of studies have addressed the potential benefits and costs of group living for predators and for prey, but this has not been much formalised within a model. We focused on the "many eyes - many mouths trade-off", assuming a trade-off between the benefits of group living (increased predation efficiency for predators, increased defence against predation for prey) and the costs (the need to share the captured prey for the predators, to share the resources for the prey). We built a model based on game theory to study this trade-off. The model results are in accordance with empirical evidence that habitat openness encourages group living, and that low risks of predation favour lonely prey. Under some conditions, complex dynamics may occur, like time oscillating proportions of grouped predators and prey.
+<br>
+<br>
+<h3 id="Publications">Publications</h3>
+<h4>Articles</h4>
+
+<div id="mapid" style="width: 800px; height: 400px;"></div>
+<script>
+
+	var satellite = L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiY2xldHQiLCJhIjoiY2xmd2lieXZvMGNvODNtbzA4MzM4aXR3NCJ9.9uPlRGlMamV5ej8q1ONIVg', {
+        minZoom: 2,
+		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+			'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+			'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+		id: 'mapbox/satellite-streets-v11',
+		tileSize: 512,
+		zoomOffset: -1}), 
+    ocean = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}', {
+        minZoom: 2,
+        attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri'}),
+    oceanref = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}', {
+        minZoom: 2})        
+        ;
+    
+    var mymap = L.map('mapid', {
+    center: [0, 40],
+    zoom: 2,
+    layers: [ocean, oceanref]
+    });
+
+    var baseMaps = {
+    "Ocean": L.layerGroup([ocean, oceanref]),
+    "Satellite": satellite
+    };
+
+    L.control.layers(baseMaps).addTo(mymap);
+    var mymarkers = new L.markerClusterGroup({maxClusterRadius: 20});
+    var mymarker = new L.marker([42, 8]).bindPopup("[74] <a href='http://dx.doi.org/10.1016/j.ecss.2025.109183' target='_blank'>Barrier et al. (2025)</a>. Larval dispersal dynamics of <i>Maja squinado</i> in the Northwestern Mediterranean: a biophysical modeling approach.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([15, -45]).bindPopup("[73] <a href='http://dx.doi.org/10.1016/j.pocean.2024.103364' target='_blank'>Podlejski et al. (2024)</a>. Drivers of growth and decay of <i>Sargassum</i> in the Tropical Atlantic: A Lagrangian approach.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-6, -34]).bindPopup("[72] <a href='http://dx.doi.org/10.1002/lno.12648' target='_blank'>Giachini Tosetto et al. (2024b)</a>. Diel vertical migration and seamount stepping stones promote species connectivity from coastal to offshore insular systems in the Tropical Southwestern Atlantic.");   
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-20, 37]).bindPopup("[71] <a href='http://dx.doi.org/10.1371/journal.pclm.0000414' target='_blank'>Malauene et al. (2024)</a>. Influence of Mozambique Channel eddies on larval loss of two shallow-water commercial shrimp species.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-6, -34]).bindPopup("[70] <a href='http://dx.doi.org/10.1111/ecog.07110' target='_blank'>Giachini Tosetto et al. (2024a)</a>. Identifying community assembling zones and connectivity pathways in the Tropical Southwestern Atlantic Ocean.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([42, 8]).bindPopup("[69] <a href='http://dx.doi.org/10.1016/j.seares.2023.102464' target='_blank'>Barrier et al. (2024)</a>. Edible sea urchin (<i>Paracentrotus lividus</i>) larval dispersal and connectivity modelling in the northwestern Mediterranean Sea.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 18]).bindPopup("[68] <a href='http://dx.doi.org/10.3354/meps14312' target='_blank'>Lett et al. (2024)</a>. Corridors and barriers to marine connectivity around southern Africa.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-34, 26]).bindPopup("[67] <a href='http://dx.doi.org/10.3354/meps14272' target='_blank'>Muller et al. (2024)</a>. Coastal connectivity of an abundant inshore fish species, model-data comparison along the southern coast of South Africa.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-11, -79]).bindPopup("[66] <a href='http://dx.doi.org/10.1016/j.pocean.2023.103034' target='_blank'>Flores-Valiente et al. (2023)</a>. Influence of combined temperature and food availability on Peruvian anchovy (<i>Engraulis ringens</i>) early life stages in the northern Humboldt Current system: A modelling approach.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-10, 70]).bindPopup("[65] <a href='http://dx.doi.org/10.1016/j.fishres.2023.106711' target='_blank'>Imzilen et al. (2023)</a>. Simulations of drifting fish aggregating device (dFAD) trajectories in the Atlantic and Indian Oceans.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([0, -20]).bindPopup("[65] <a href='http://dx.doi.org/10.1016/j.fishres.2023.106711' target='_blank'>Imzilen et al. (2023)</a>. Simulations of drifting fish aggregating device (dFAD) trajectories in the Atlantic and Indian Oceans.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([15, -45]).bindPopup("[64] <a href='http://dx.doi.org/10.1016/j.marpolbul.2023.114629' target='_blank'>Podlejski et al. (2023)</a>. A new <i>Sargassum</i> drift model derived from features tracking in MODIS images.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([15, -45]).bindPopup("[63] <a href='http://dx.doi.org/10.3389/fmars.2022.960939' target='_blank'>Podlejski et al. (2022)</a>. Filtering out false <i>Sargassum</i> detections using context features.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-5, 55]).bindPopup("[62] <a href='http://dx.doi.org/10.1093/icesjms/fsac091' target='_blank'>MacMillan et al. (2022)</a>. Spatio-temporal variability in drifting Fish Aggregating Device (dFAD) beaching events in the Seychelles Archipelago.");
+	mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-10, 70]).bindPopup("[61] <a href='http://dx.doi.org/10.1038/s41893-022-00883-y' target='_blank'>Imzilen et al. (2022)</a>. Recovery at sea of abandoned, lost or discarded drifting fish aggregating devices.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([0, -20]).bindPopup("[61] <a href='http://dx.doi.org/10.1038/s41893-022-00883-y' target='_blank'>Imzilen et al. (2022)</a>. Recovery at sea of abandoned, lost or discarded drifting fish aggregating devices.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-10, 70]).bindPopup("[60] <a href='http://dx.doi.org/10.1093/icesjms/fsab175' target='_blank'>Dupaix et al. (2021)</a>. Surface habitat modification through industrial tuna fishery practices.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-20, 37]).bindPopup("[59] <a href='http://dx.doi.org/10.1016/j.ecss.2021.107268' target='_blank'>Malauene et al. (2021)</a>. Spawning areas of two shallow-water penaeid shrimps (<i>Penaeus indicus</i> and <i>Metapenaeus monoceros</i>) on the Sofala Bank, Mozambique.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-10, 70]).bindPopup("[58] <a href='http://dx.doi.org/10.1016/j.biocon.2020.108939' target='_blank'>Imzilen et al. (2021)</a>. Spatial management can significantly reduce dFAD beachings in Indian and Atlantic Ocean tropical tuna purse seine fisheries.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([0, -20]).bindPopup("[58] <a href='http://dx.doi.org/10.1016/j.biocon.2020.108939' target='_blank'>Imzilen et al. (2021)</a>. Spatial management can significantly reduce dFAD beachings in Indian and Atlantic Ocean tropical tuna purse seine fisheries.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-5, 55]).bindPopup("[57] <a href='http://dx.doi.org/10.1002/aqc.3420' target='_blank'>Bonnin et al. (2021)</a>. Can drifting objects drive the movements of a vulnerable pelagic shark?");
+	mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([0, -20]).bindPopup("[56] <a href='http://dx.doi.org/10.1016/j.pocean.2020.102426' target='_blank'>Amemou et al. (2020)</a>. Assessment of a Lagrangian model using trajectories of oceanographic drifters and fishing devices in the Tropical Atlantic Ocean.");
+    mymarkers.addLayer(mymarker);
+	var mymarker = new L.marker([-35, 50]).bindPopup("[55] <a href='http://dx.doi.org/10.1016/j.dsr2.2020.104774' target='_blank'>Crochelet et al. (2020)</a>. Connectivity between seamounts and coastal ecosystems in the Southwestern Indian Ocean.");
+	mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-1.9, 73.4]).bindPopup("[54] <a href='http://dx.doi.org/10.1016/j.marpolbul.2020.111037' target='_blank'>Stelfox et al. (2020)</a>. Minimum drift times infer trajectories of ghost nets found in the Maldives.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([43.38, 3.57]).bindPopup("[52] <a href='http://dx.doi.org/10.3354/meps13151' target='_blank'>Lagarde et al. (2019)</a>. Duality of trophic supply and hydrodynamic connectivity drives spatial patterns of Pacific oyster recruitment.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([43.2, 5.23]).bindPopup("[51] <a href='http://dx.doi.org/10.1016/j.marenvres.2019.104781' target='_blank'>Lett et al. (2019)</a>. Modeling larval dispersal for the gilthead seabream in the northwestern Mediterranean Sea.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-10, 70]).bindPopup("[50] <a href='http://dx.doi.org/10.1016/j.pocean.2018.11.007' target='_blank'>Imzilen et al. (2019)</a>. Fish aggregating devices drift like oceanographic drifters in the near-surface currents of the Atlantic and Indian Oceans.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([0, -20]).bindPopup("[50] <a href='http://dx.doi.org/10.1016/j.pocean.2018.11.007' target='_blank'>Imzilen et al. (2019)</a>. Fish aggregating devices drift like oceanographic drifters in the near-surface currents of the Atlantic and Indian Oceans.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-6.43, -80.86]).bindPopup("[49] <a href='http://dx.doi.org/10.1016/j.seares.2018.12.003' target='_blank'>Flores-Valiente et al. (2019)</a>. Larval supply of Peruvian scallop to the marine reserve of Lobos de Tierra Island: a modeling approach.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-20, 37]).bindPopup("[48] <a href='http://dx.doi.org/10.1016/j.jmarsys.2018.05.001' target='_blank'>Malauene et al. (2018)</a>. Impact of offshore eddies on shelf circulation and river plumes of the Sofala Bank, Mozambique Channel.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([40, -9]).bindPopup("[47] <a href='http://dx.doi.org/10.1016/j.pocean.2018.02.011' target='_blank'>Santos et al. (2018)</a>. Sardine (<i>Sardina pilchardus</i>) larval dispersal in the Iberian upwelling system, using coupled biophysical techniques.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([37.63,-0.69]).bindPopup("[46] <a href='http://dx.doi.org/10.1016/j.marenvres.2017.12.011' target='_blank'>Cal&ograve; et al. (2018)</a>. Use of Lagrangian simulations to hindcast the geographical position of propagule release zones in a Mediterranean coastal fish.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([43.38, 3.57]).bindPopup("[45] <a href='http://dx.doi.org/10.3354/meps12265' target='_blank'>Lagarde et al. (2017)</a>. Recruitment of the Pacific oyster <i>Crassostrea gigas</i> in a shellfish-exploited Mediterranean lagoon: discovery, driving factors and a favorable environmental window.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([4, -4]).bindPopup("[43] <a href='http://dx.doi.org/10.1016/j.pocean.2016.10.008' target='_blank'>Kon&eacute; et al. (2017)</a>. A biophysical model of <i>S. aurita</i> early life history in the northern Gulf of Guinea.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 18]).bindPopup("[42] <a href='http://dx.doi.org/10.2989/1814232X.2015.1125390' target='_blank'>Kirkman et al. (2016)</a>. Spatial characterisation of the Benguela ecosystem for ecosystem based management.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-27, -71]).bindPopup("[41] <a href='http://dx.doi.org/10.1371/journal.pone.0146418' target='_blank'>Garavelli et al. (2016)</a>. Influence of biological factors on connectivity patterns for <i>Concholepas concholepas</i> (loco) in Chile.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-31.7,29.6]).bindPopup("[40] <a href='http://dx.doi.org/10.1111/1365-2656.12455' target='_blank'>Thiebaut et al. (2016)</a>. How to capture fish in a school? Effect of successive predator attacks on seabird feeding success.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 18]).bindPopup("[39] <a href='http://dx.doi.org/10.2989/1814232X.2015.1105295' target='_blank'>Lett et al. (2015)</a>. Biophysical models of larval dispersal in the Benguela Current ecosystem.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-22.29, 166.33]).bindPopup("[38] <a href='http://dx.doi.org/10.1007/s00338-015-1300-4' target='_blank'>Cuif et al. (2015)</a>. Monthly variability of self-recruitment for a coral reef damselfish.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-22.29, 166.33]).bindPopup("[36] <a href='http://dx.doi.org/10.1016/j.jembe.2014.05.019' target='_blank'>Cuif et al. (2014b)</a>. Evaluation of transgenerational isotope labeling of embryonic otoliths in a coral reef damselfish with single and repeated injections of enriched 137Barium.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-27, -71]).bindPopup("[34] <a href='http://dx.doi.org/10.1016/j.pocean.2014.03.011' target='_blank'>Garavelli et al. (2014)</a>. Identifying appropriate spatial scales for marine conservation and management using a larval dispersal model: the case of <i>Concholepas concholepas</i> (loco) in Chile.");
+    mymarkers.addLayer(mymarker)
+    var mymarker = new L.marker([-22.29, 166.33]).bindPopup("[33] <a href='http://dx.doi.org/10.1016/j.pocean.2013.12.006' target='_blank'>Cuif et al. (2014a)</a>. Wind-induced variability in larval retention in a coral reef system: a biophysical modelling study in the South-West Lagoon of New Caledonia.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-34.5, 24]).bindPopup("[32] <a href='http://dx.doi.org/10.2989/1814232X.2015.1105295' target='_blank'>Martins et al. (2014)</a>. Modelling transport of chokka squid (<i>Loligo reynaudii</i>) paralarvae off South Africa: reviewing, testing and extending the Westward Transport Hypothesis.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 21]).bindPopup("[31] <a href='http://dx.doi.org/10.2989/1814232X.2013.796893' target='_blank'>Kon&eacute; et al. (2013)</a>. Modelling the effect of food availability on recruitment success of Cape anchovy ichthyoplankton in the southern Benguela upwelling system.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 21]).bindPopup("[29] <a href='http://dx.doi.org/10.1093/plankt/fbs039' target='_blank'>Garavelli et al. (2012)</a>. Modeling the dispersal of Cape hake ichthyoplankton.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([27, -15]).bindPopup("[27] <a href='http://dx.doi.org/10.1016/j.jmarsys.2011.02.025' target='_blank'>Brochier et al. (2011b)</a>. Ichthyoplankton transport from the African coast to the Canary Islands.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-11, -79]).bindPopup("[26] <a href='http://dx.doi.org/10.1111/j.1467-2979.2010.00385.x' target='_blank'>Brochier et al. (2011a)</a>. Investigating the 'northern Humboldt paradox' from model comparisons of small pelagic fish reproductive strategies in eastern boundary upwelling ecosystems.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-11, -79]).bindPopup("[22] <a href='http://dx.doi.org/10.1016/j.pocean.2009.07.044' target='_blank'>Brochier et al. (2009)</a>. Small pelagic fish reproductive strategies in upwelling systems: a natal homing evolutionary model to study environmental constraints.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-27, -71]).bindPopup("[22] <a href='http://dx.doi.org/10.1016/j.pocean.2009.07.044' target='_blank'>Brochier et al. (2009)</a>. Small pelagic fish reproductive strategies in upwelling systems: a natal homing evolutionary model to study environmental constraints.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([27, -15]).bindPopup("[22] <a href='http://dx.doi.org/10.1016/j.pocean.2009.07.044' target='_blank'>Brochier et al. (2009)</a>. Small pelagic fish reproductive strategies in upwelling systems: a natal homing evolutionary model to study environmental constraints.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-11, -79]).bindPopup("[21] <a href='http://dx.doi.org/10.1016/j.pocean.2008.10.004' target='_blank'>Brochier et al. (2008b)</a>. An individual-based model study of anchovy early life history in the northern Humboldt Current system.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([27, -15]).bindPopup("[19] <a href='http://dx.doi.org/10.1093/plankt/fbn066' target='_blank'>Brochier et al. (2008a)</a>. Modelling sardine and anchovy ichthyoplankton transport in the Canary Current System.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-28, 15]).bindPopup("[15] <a href='http://dx.doi.org/10.3354/meps06982' target='_blank'>Lett et al. (2007b)</a>. Assessment of an environmental barrier to transport of ichthyoplankton from the southern to the northern Benguela ecosystems.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-11, -79]).bindPopup("[14] <a href='http://dx.doi.org/10.1016/j.jmarsys.2006.03.012' target='_blank'>Lett et al. (2007a)</a>. Enrichment, concentration and retention processes in relation to anchovy (<i>Engraulis ringens</i>) eggs and larvae distributions in the northern Humboldt upwelling ecosystem.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 18]).bindPopup("[12] <a href='http://dx.doi.org/10.1111/j.1365-2419.2005.00392.x' target='_blank'>Lett et al. (2006)</a>. Simulation and quantification of enrichment and retention processes in the southern Benguela upwelling ecosystem.");
+    mymarkers.addLayer(mymarker);
+    var mymarker = new L.marker([-35, 21]).bindPopup("[10] <a href='http://dx.doi.org/10.1016/j.jmarsys.2005.03.007' target='_blank'>Miller et al. (2006)</a>. Modelling the effects of physical-biological interactions and spatial variability in spawning and nursery areas on transport and retention of sardine <i>Sardinops sagax</i> eggs and larvae in the southern Benguela ecosystem.");
+    mymarkers.addLayer(mymarker);
+    L.control.scale().addTo(mymap);
+    mymap.addLayer(mymarkers);
+    
+</script>
+
+<br>
+
+<!--<span id='badgeCont604734' style='width:126px'><script src='http://labs.researcherid.com/mashlets?el=badgeCont604734&mashlet=badge&showTitle=false&className=a&rid=A-2144-2010'></script></span>
+<a href="https://www.sciencedirect.com/science/journal/01411136" title="Marine Environmental Research" target="_blank"><img src="Files/JournalMER.gif" width=45 height=61></a>
+<a href="https://academic.oup.com/icesjms/" title="ICES Journal of Marine Science" target="_blank"><img src="Files/JournalICESJMS.jpg" width=45 height=61></a>
+<a href="http://onlinelibrary.wiley.com/journal/10.1111/%28ISSN%291365-2656" title="Journal of Animal Ecology" target="_blank"><img src="Files/JournalJAE.gif" width=45 height=61></a>
+<a href="http://www.springer.com/life+sciences/ecology/journal/338" title="Coral Reefs" target="_blank"><img src="Files/JournalCR.jpg" width=45 height=61></a>
+<a href="http://www.esajournals.org/toc/ecol/current" title="Ecology" target="_blank"><img src="Files/JournalE.jpg" width=45 height=61></a>
+<a href="http://www.sciencedirect.com/science/journal/00220981" title="Journal of Experimental Marine Biology and Ecology" target="_blank"><img src="Files/JournalJEMBE.gif" width=45 height=61></a>
+<a href="http://onlinelibrary.wiley.com/journal/10.1111/%28ISSN%291467-2979" title="Fish and Fisheries" target="_blank"><img src="Files/JournalFF.jpg" width=45 height=61></a>
+<a href="http://www.sciencedirect.com/science/journal/18773435" title="Current Opinion in Environmental Sustainability" target="_blank"><img src="Files/JournalCOES.gif" width=45 height=61></a>
+<a href="http://www.nrcresearchpress.com/journal/cjfas" title="Canadian Journal of Fisheries and Aquatic Sciences" target="_blank"><img src="Files/JournalCJFAS.jpg" width=45 height=61></a>
+<a href="http://www.sciencedirect.com/science/journal/00796611" title="Progress in Oceanography" target="_blank"><img src="Files/JournalPiO.gif" width=45 height=61></a>
+<a href="http://www.springer.com/life+sci/behavioural/journal/265" title="Behavioral Ecology and Sociobiology" target="_blank"><img src="Files/JournalBES.jpg" width=45 height=61></a>
+<a href="http://plankt.oxfordjournals.org/" title="Journal of Plankton Research" target="_blank"><img src="Files/JournalJPR.gif" width=45 height=61></a>
+<a href="http://www.elsevier.com/wps/find/journaldescription.cws_home/422921/description#description" title="Environmental Modelling & Software" target="_blank"><img src="Files/JournalEMS.gif" width=45 height=61></a>
+<a href="http://www.int-res.com/journals/meps/" title="Marine Ecology Progress Series" target="_blank"><img src="Files/JournalMEPS.jpg" width=45 height=61></a>
+<a href="http://www3.interscience.wiley.com/journal/118505814/home" title="Fisheries Oceanography" target="_blank"><img src="Files/JournalFO.gif" width=45 height=61></a>
+<a href="http://www.elsevier.com/wps/find/journaldescription.cws_home/503344/description#description" title="Journal of Marine Systems" target="_blank"><img src="Files/JournalJMS.gif" width=45 height=61></a>
+<a href="http://www3.interscience.wiley.com/journal/118531693/home" target="_blank"><img src="Files/JournalOikos.gif" title="Oikos" width=45 height=61></a>
+<a href="http://www.elsevier.com/wps/find/journaldescription.cws_home/622904/description#description" title="Journal of Theoretical Biology" target="_blank"><img src="Files/JournalJTB.gif" width=45 height=61></a>
+<a href="http://www.elsevier.com/wps/find/journaldescription.cws_home/503306/description#description" title="Ecological Modelling" target="_blank"><img src="Files/JournalEM.gif" width=45 height=61></a>
+<br><br> -->
+[75] <a href='http://dx.doi.org/10.1016/j.marpolbul.2025.117923' target='_blank'>Debue M, Guinaldo T, Jouanno J, Chami M, Barbier S, Berline L, Chevalier C, Daniel P, Daniel W, Descloitres J, Gros-Desormeaux J-R, <b>Lett C</b>, Minghelli A (2025)</a>. Understanding the <i>Sargassum</i> phenomenon in the Tropical Atlantic Ocean: From satellite monitoring to stranding forecast. Marine Pollution Bulletin 216: 117923.<br>
+<br>
+[74] <a href='http://dx.doi.org/10.1016/j.ecss.2025.109183' target='_blank'>Barrier C, Beneteau T, Raffalli M-C, Barrier N, <b>Lett C</b>, Pasqualini V, Durieux EDH (2025)</a>. Larval dispersal dynamics of <i>Maja squinado</i> in the Northwestern Mediterranean: a biophysical modeling approach. Estuarine, Coastal and Shelf Science 316: 109183.<br>
+<br>
+[73] <a href='http://dx.doi.org/10.1016/j.pocean.2024.103364' target='_blank'>Podlejski W, Berline L, Jouanno J, Barrier N, <b>Lett C</b> (2024)</a>. Drivers of growth and decay of <i>Sargassum</i> in the Tropical Atlantic: A Lagrangian approach. Progress in Oceanography 229: 103364.<br>
+<br>
+[72] <a href='http://dx.doi.org/10.1002/lno.12648' target='_blank'>Giachini Tosetto E, <b>Lett C</b>, Neumann-Leitão S, Koch-Larrouy A, Barrier N, Costa da Silva A, Salvetat J, Bertrand A (2024)</a>. Diel vertical migration and seamount stepping stones promote species connectivity from coastal to offshore insular systems in the Tropical Southwestern Atlantic. Limnology and Oceanography 69(9): 2071&#8211;2084.<br>
+<br>
+[71] <a href='http://dx.doi.org/10.1371/journal.pclm.0000414' target='_blank'>Malauene BS, <b>Lett C</b>, Marsac F, Penven P, Abdula S, Moloney CL, Roberts MJ (2024)</a>. Influence of Mozambique Channel eddies on larval loss of two shallow-water commercial shrimp species. Plos Climate 3(6): e0000414.<br>
+<br>
+[70] <a href='http://dx.doi.org/10.1111/ecog.07110' target='_blank'>Giachini Tosetto E, <b>Lett C</b>, Koch-Larrouy A, Costa da Silva A, Neumann-Leitão S, Nogueira Junior M, Barrier N, Dossa AN, Tchilibou M, Bauchot P, Morvan G, Bertrand A (2024)</a>. Identifying community-based recruitment zones and connectivity pathways in the Tropical Southwestern Atlantic Ocean. Ecography 2024(3): e0711.<br>
+<br>
+[69] <a href='http://dx.doi.org/10.1016/j.seares.2023.102464' target='_blank'>Barrier C, Ternengo S, El Idrissi O, Piacentini L, Barrier N, <b>Lett C</b>, Pasqualini V, Durieux EDH (2024)</a>. Edible sea urchin (<i>Paracentrotus lividus</i>) larval dispersal and connectivity modelling in the northwestern Mediterranean Sea. Journal of Sea Research 197: 102464.<br>
+<br>
+[68] <a href='http://dx.doi.org/10.3354/meps14312' target='_blank'><b>Lett C</b>, Malauene BS, Hoareau T, Kaplan DM, Porri F (2024)</a>. Corridors and barriers to marine connectivity around southern Africa. Marine Ecology Progress Series 731: 105&#8211;127. <a href='https://lemag.ird.fr/fr/la-singuliere-connectivite-des-espaces-marins-dafrique-australe' target='_blank'>IRD Le Mag</a><br>
+<br>
+[67] <a href='http://dx.doi.org/10.3354/meps14272' target='_blank'>Muller C, <b>Lett C</b>, Porri F, Pattrick P, Bailey D, Denis H, Barrier N, Potts W, Kaplan DM (2024)</a>. Coastal connectivity of an abundant inshore fish species: model-data comparison along the southern coast of South Africa. Marine Ecology Progress Series 731: 89&#8211;104.<br>
+<br>
+[66] <a href='http://dx.doi.org/10.1016/j.pocean.2023.103034' target='_blank'>Flores-Valiente J, <b>Lett C</b>, Colas F, Pecquerie L, Aguirre-Velarde A, Rioual F, Tam J, Bertrand A, Ay&oacute;n P, Sall S, Barrier N, Brochier T (2023)</a>. Influence of combined temperature and food availability on Peruvian anchovy (<i>Engraulis ringens</i>) early life stages in the northern Humboldt Current system: A modelling approach. Progress in Oceanography 215: 103034.<br>
+<br>
+[65] <a href='http://dx.doi.org/10.1016/j.fishres.2023.106711' target='_blank'>Imzilen T, Kaplan DM, Barrier N, <b>Lett C</b> (2023)</a>. Simulations of drifting fish aggregating device (dFAD) trajectories in the Atlantic and Indian Oceans. Fisheries Research 264: 106711.<br>
+<br>
+[64] <a href='http://dx.doi.org/10.1016/j.marpolbul.2023.114629' target='_blank'>Podlejski W, Berline L, Nerini D, Doglioli A, <b>Lett C</b> (2023)</a>. A new <i>Sargassum</i> drift model derived from features tracking in MODIS images. Marine Pollution Bulletin 188: 114629.<br>
+<br>
+[63] <a href="http://dx.doi.org/10.3389/fmars.2022.960939" target="_blank">Podlejski W, Descloitres J, Chevalier C, Minghelli A, <b>Lett C</b>, Berline L (2022)</a>. Filtering out false <i>Sargassum</i> detections using context features. Frontiers in Marine Science 9: 960939.<br>
+<br>
+[62] <a href="http://dx.doi.org/10.1093/icesjms/fsac091" target="_blank">MacMillan I, Attrill MJ, Imzilen T, <b>Lett C</b>, Walmsley S, Chu C, Kaplan DM (2022)</a>. Spatio-temporal variability in drifting Fish Aggregating Device (dFAD) beaching events in the Seychelles Archipelago. ICES Journal of Marine Science 79(5): 1685&#8211;1700.<br>
+<br>
+[61] <a href="http://dx.doi.org/10.1038/s41893-022-00883-y" target="_blank">Imzilen T, <b>Lett C</b>, Chassot E, Maufroy A, Goujon M, Kaplan DM (2022)</a>. Recovery at sea of abandoned, lost or discarded drifting fish aggregating devices. Nature Sustainability 5: 593&#8211;602. <a href="http://dx.doi.org/10.1038/d41586-022-01222-z" target="_blank">Nature Research Highlight</a> <a href='https://lemag.ird.fr/fr/peche-au-thon-comment-reduire-la-pollution' target='_blank'>IRD Le Mag</a><br>
+<br>
+[60] <a href="http://dx.doi.org/10.1093/icesjms/fsab175" target="_blank">Dupaix A, Capello M, <b>Lett C</b>, Andrello M, Barrier N, Viennois G, Dagorn L (2021)</a>. Surface habitat modification through industrial tuna fishery practices. ICES Journal of Marine Science 78(9): 3075&#8211;3088.<br>
+<br>
+[59] <a href="http://dx.doi.org/10.1016/j.ecss.2021.107268" target="_blank">Malauene BS, <b>Lett C</b>, Marsac F, Roberts MJ, Brito A, Abdula S, Moloney CL (2021)</a>. Spawning areas of two shallow-water penaeid shrimps (<i>Penaeus indicus</i> and <i>Metapenaeus monoceros</i>) on the Sofala Bank, Mozambique. Estuarine, Coastal and Shelf Science 253: 107268.<br>
+<br>
+[58] <a href="http://dx.doi.org/10.1016/j.biocon.2020.108939" target="_blank">Imzilen T, <b>Lett C</b>, Chassot E, Kaplan DM (2021)</a>. Spatial management can significantly reduce dFAD beachings in Indian and Atlantic Ocean tropical tuna purse seine fisheries. Biological Conservation 254: 108939. <a href='https://lemag.ird.fr/fr/peche-au-thon-comment-reduire-la-pollution' target='_blank'>IRD Le Mag</a><br>
+<br>
+[57] <a href="http://dx.doi.org/10.1002/aqc.3420" target="_blank">Bonnin L, <b>Lett C</b>, Dagorn L, Filmalter JD, Forget F, Verley P, Capello M (2021)</a>. Can drifting objects drive the movements of a vulnerable pelagic shark? Aquatic Conservation: Marine and Freshwater Ecosystems 31(1): 74&#8211;82.<br>
+<br>
+[56] <a href="http://dx.doi.org/10.1016/j.pocean.2020.102426" target="_blank">Amemou H, Kon&eacute; V, Aman A, <b>Lett C</b> (2020)</a>. Assessment of a Lagrangian model using trajectories of oceanographic drifters and fishing devices in the Tropical Atlantic Ocean. Progress in Oceanography 188: 102426.<br>
+<br>
+[55] <a href="http://dx.doi.org/10.1016/j.dsr2.2020.104774" target="_blank">Crochelet E, Barrier N, Andrello M, Marsac F, Spadone A, <b>Lett C</b> (2020)</a>. Connectivity between seamounts and coastal ecosystems in the Southwestern Indian Ocean. Deep-Sea Research Part II 176: 104774.<br>
+<br>
+[54] <a href="http://dx.doi.org/10.1016/j.marpolbul.2020.111037" target="_blank">Stelfox M, <b>Lett C</b>, Reid G, Souch G, Sweet M (2020)</a>. Minimum drift times infer trajectories of ghost nets found in the Maldives. Marine Pollution Bulletin 154: 111037.<br>
+<br>
+[53] <a href="http://dx.doi.org/10.1016/j.ecolmodel.2019.108858" target="_blank"><b>Lett C</b>, Barrier N, Bahlali M (2020)</a>. Converging approaches for modeling the dispersal of propagules in air and sea. Ecological Modelling 415: 108858.<br>
+<br>
+[52] <a href="http://dx.doi.org/10.3354/meps13151" target="_blank">Lagarde F, Fiandrino A, Ubertini M, Roque d’orbcastel E, Mortreux S, Chiantella C, Bec B, Bonnet D, Roques C, Bernard I, Richard M, Guyondet T, Pouvreau S, <b>Lett C</b> (2019)</a>. Duality of trophic supply and hydrodynamic connectivity drives spatial patterns of Pacific oyster recruitment. Marine Ecology Progress Series 632: 81&#8211;100.<br>
+<br>
+[51] <a href="http://dx.doi.org/10.1016/j.marenvres.2019.104781" target="_blank"><b>Lett C</b>, Barrier N, Ourmi&egrave;res Y, Petit C, Labonne M, Bourjea J, Darnaude AM (2019)</a>. Modeling larval dispersal for the gilthead seabream in the northwestern Mediterranean Sea. Marine Environmental Research 152: 104781.<br>
+<br>
+[50] <a href="http://dx.doi.org/10.1016/j.pocean.2018.11.007" target="_blank">Imzilen T, Chassot E, Barde J, Demarcq H, Maufroy A, Roa-Pascuali L, Ternon J-F, <b>Lett C</b> (2019)</a>. Fish aggregating devices drift like oceanographic drifters in the near-surface currents of the Atlantic and Indian Oceans. Progress in Oceanography 171: 108&#8211;127.<br>
+<br>
+[49] <a href="http://dx.doi.org/10.1016/j.seares.2018.12.003" target="_blank">Flores-Valiente J, Tam J, Brochier T, Colas F, Pecquerie L, Aguirre-Velarde A, Mendo J, <b>Lett C</b> (2019)</a>. Larval supply of Peruvian scallop to the marine reserve of Lobos de Tierra Island: a modeling approach. Journal of Sea Research 144: 142&#8211;155.<br>
+<br>
+[48] <a href="http://dx.doi.org/10.1016/j.jmarsys.2018.05.001" target="_blank">Malauene BS, Moloney CL, <b>Lett C</b>, Roberts MJ, Marsac F,  Penven P (2018)</a>. Impact of offshore eddies on shelf circulation and river plumes of the Sofala Bank, Mozambique Channel. Journal of Marine Systems 185: 1&#8211;12.<br>
+<br>
+[47] <a href="http://dx.doi.org/10.1016/j.pocean.2018.02.011" target="_blank">Santos AMP, Nieblas AE, Verley P, Machado A, Bonhommeau S, <b>Lett C</b>, Garrido S, Peliz A (2018)</a>. Sardine (<i>Sardina pilchardus</i>) larval dispersal in the Iberian upwelling system, using coupled biophysical techniques. Progress in Oceanography 162: 83&#8211;97.<br>
+<br>
+[46] <a href="http://dx.doi.org/10.1016/j.marenvres.2017.12.011" target="_blank">Cal&ograve; A, <b>Lett C</b>, Mourre B, P&eacute;rez-Ruzafa &Aacute;, Garc&iacute;a-Charton JA (2018)</a>. Use of Lagrangian simulations to hindcast the geographical position of propagule release zones in a Mediterranean coastal fish. Marine Environmental Research 134: 16&#8211;27.<br>
+<br>
+[45] <a href="http://dx.doi.org/10.3354/meps12265" target="_blank">Lagarde F, Roque d’orbcastel E, Ubertini M, Mortreux S, Bernard I, Fiandrino A, Chiantella C, Bec B, Roques C, Bonnet D, Miron G, Richard M, Pouvreau S, <b>Lett C</b> (2017)</a>. Recruitment of the Pacific oyster <i>Crassostrea gigas</i> in a shellfish-exploited Mediterranean lagoon: discovery, driving factors and a favorable environmental window. Marine Ecology Progress Series 578: 1&#8211;17. (Feature Article).<br>
+<br>
+[44] <a href="http://dx.doi.org/10.1093/icesjms/fsw182" target="_blank">Kaplan DM, Cuif M, Fauvelot C, Vigliola L, Nguyen-Huu T, Tiavouane J, <b>Lett C</b> (2017)</a>. Uncertainty in empirical estimates of marine larval connectivity. ICES Journal of Marine Science 74(6): 1723&#8211;1734.<br>
+<br>
+[43] <a href="http://dx.doi.org/10.1016/j.pocean.2016.10.008" target="_blank">Kon&eacute; V, <b>Lett C</b>, Penven P, Bourl&egrave;s B, Djakour&eacute; S (2017)</a>. A biophysical model of <i>S. aurita</i> early life history in the northern Gulf of Guinea. Progress in Oceanography 151: 83&#8211;96.<br>
+<br>
+[42] <a href="http://dx.doi.org/10.2989/1814232X.2015.1125390" target="_blank">Kirkman SP, Bianchi G, Blamey L, Field JG, Huggett JA, Hutchings L, Jackson-Veitch J, Jarre A, Lamont T, <b>Lett C</b>, Lipinski M, Mafwila SW, Pfaff MC, Samaai T, Shannon LJ, Shin Y-J, van der Lingen CD, Yemane D (2016)</a>. Spatial characterisation of the Benguela ecosystem for ecosystem based management. African Journal of Marine Science 38(1): 7&#8211;22.<br>
+<br>
+[41] <a href="http://dx.doi.org/10.1371/journal.pone.0146418" target="_blank">Garavelli L, Colas F, Verley P, Kaplan DM, Yannicelli B, <b>Lett C</b> (2016)</a>. Influence of biological factors on connectivity patterns for <i>Concholepas concholepas</i> (loco) in Chile. PLoS ONE 11(1): e0146418.<br>
+<br>
+[40] <a href="http://dx.doi.org/10.1111/1365-2656.12455" target="_blank">Thiebault A, Semeria M, <b>Lett C</b>, Tremblay Y (2016)</a>. How to capture fish in a school? Effect of successive predator attacks on seabird feeding success. Journal of Animal Ecology: 85(1): 157&#8211;167.<br>
+<br>
+[39] <a href="http://dx.doi.org/10.2989/1814232X.2015.1105295" target="_blank"><b>Lett C</b>, van der Lingen CD, Loveday BR, Moloney CL (2015)</a>. Biophysical models of larval dispersal in the Benguela Current ecosystem. African Journal of Marine Science 37(4): 457&#8211;465.<br>
+<br>
+[38] <a href="http://dx.doi.org/10.1007/s00338-015-1300-4" target="_blank">Cuif M, Kaplan DM, Fauvelot C, <b>Lett C</b>, Vigliola L (2015)</a>. Monthly variability of self-recruitment for a coral reef damselfish. Coral Reefs 34(3): 759&#8211;770.<br>
+<br>
+[37] <a href="http://dx.doi.org/10.1890/14-1305.1" target="_blank"><b>Lett C</b>, Nguyen-Huu T, Cuif M, Saenz-Agudelo P, Kaplan DM (2015)</a>. Linking local retention, self-recruitment, and persistence in marine metapopulations. Ecology 96(8): 2236&#8211;2244.<br>
+<br>
+[36] <a href="http://dx.doi.org/10.1016/j.jembe.2014.05.019" target="_blank">Cuif M, Keller F, Chateau O, Kaplan DM, Labonne M, <b>Lett C</b>, Vigliola L (2014)</a>. Evaluation of transgenerational isotope labeling of embryonic otoliths in a coral reef damselfish with single and repeated injections of enriched 137Barium. Journal of Experimental Marine Biology and Ecology 459: 151&#8211;159.<br>
+<br>
+[35] <a href="http://dx.doi.org/10.1007/s12080-014-0213-0" target="_blank"><b>Lett C</b>, Semeria M, Thiebault A, Tremblay Y (2014)</a>. Effects of successive predator attacks on prey aggregations. Theoretical Ecology 7(3): 239&#8211;252.<br>
+<br>
+[34] <a href="http://dx.doi.org/10.1016/j.pocean.2014.03.011" target="_blank">Garavelli L, Kaplan DM, Colas F, Stotz W, Yannicelli B, <b>Lett C</b> (2014)</a>. Identifying appropriate spatial scales for marine conservation and management using a larval dispersal model: the case of <i>Concholepas concholepas</i> (loco) in Chile. Progress in Oceanography 124: 42&#8211;53.<br>
+<br>
+[33] <a href="http://dx.doi.org/10.1016/j.pocean.2013.12.006" target="_blank">Cuif M, Kaplan DM, Lef&egrave;vre J, Faure VM, Caillaud M, Verley P, Vigliola L, <b>Lett C</b> (2014)</a>. Wind-induced variability in larval retention in a coral reef system: a biophysical modelling study in the South-West Lagoon of New Caledonia. Progress in Oceanography 122: 105&#8211;115.<br>
+<br>
+[32] <a href="http://dx.doi.org/10.1111/fog.12046" target="_blank">Martins RS, Roberts MJ, <b>Lett C</b>, Chang N, Moloney CL, Camargo MG, Vidal EAG (2014)</a>. Modelling transport of chokka squid (<i>Loligo reynaudii</i>) paralarvae off South Africa: reviewing, testing and extending the Westward Transport Hypothesis. Fisheries Oceanography 23(2): 116&#8211;131.<br>
+<br>
+[31] <a href="http://dx.doi.org/10.2989/1814232X.2013.796893" target="_blank">Kon&eacute; V, <b>Lett C</b>, Fr&eacute;on P (2013)</a>. Modelling the effect of food availability on recruitment success of Cape anchovy ichthyoplankton in the southern Benguela upwelling system. African Journal of Marine Science 35(2): 151&#8211;161.<br>
+<br>
+[30] <a href="http://dx.doi.org/10.1016/j.fishres.2012.04.016" target="_blank">Gr&uuml;ss A, Kaplan DM, <b>Lett C</b> (2012)</a>. Estimating local settler-recruit relationship parameters for complex spatially explicit models. Fisheries Research 127&#8211;128: 34&#8211;39.<br>
+<br>
+[29] <a href="http://dx.doi.org/10.1093/plankt/fbs039" target="_blank">Garavelli L, Gr&uuml;ss A, Grote B, Chang N, Smith M, Verley P, Stenevik EK, Kaplan DM, <b>Lett C</b> (2012)</a>. Modeling the dispersal of Cape hake ichthyoplankton. Journal of Plankton Research 34(8): 655&#8211;669.<br>
+<br>
+[28] <a href="http://dx.doi.org/10.3934/mbe.2011.8.769" target="_blank">Moussaoui A, Auger P, <b>Lett C</b> (2011)</a>. Optimal number of sites in multi-site fisheries with fish stock dependent migrations. Mathematical Biosciences and Engineering 8(3): 769&#8211;783.<br>
+<br>
+[27] <a href="http://dx.doi.org/10.1016/j.jmarsys.2011.02.025" target="_blank">Brochier T, Mason E, Moyano M, Berraho A, Colas F, Sangr&agrave; P, Hern&aacute;ndez-Le&oacute;n S , Ettahiri O, <b>Lett C</b> (2011)</a>. Ichthyoplankton transport from the African coast to the Canary Islands. Journal of Marine Systems 87(2): 109&#8211;122.<br>
+<br>
+[26] <a href="http://dx.doi.org/10.1111/j.1467-2979.2010.00385.x" target="_blank">Brochier T, <b>Lett C</b>, Fr&eacute;on P (2011)</a>. Investigating the 'northern Humboldt paradox' from model comparisons of small pelagic fish reproductive strategies in eastern boundary upwelling ecosystems. Fish and Fisheries 12(1): 94&#8211;109.<br>
+<br>
+[25] <a href="http://dx.doi.org/10.1016/j.pocean.2010.09.005" target="_blank"><b>Lett C</b>, Ayata S-D, Huret M, Irisson J-O (2010)</a>. Biophysical modelling to investigate the effects of climate change on marine population dispersal and connectivity. Progress in Oceanography 87(1&#8211;4): 106&#8211;113.<br>
+<br>
+[24] <a href="http://dx.doi.org/10.1016/j.cosust.2010.02.002" target="_blank">Kaplan DM, Planes S, Fauvelot C, Brochier T, <b>Lett C</b>, Bodin N, Le Loc'h F, Tremblay Y, Georges J-Y (2010)</a>. New tools for the spatial management of living marine resources. Current Opinion in Environmental Sustainability 2(1&#8211;2): 88&#8211;93.<br>
+<br>
+[23] <a href="http://dx.doi.org/10.1139/F09-188" target="_blank">Auger P, <b>Lett C</b>, Moussaoui A, Pioch S (2010)</a>. Optimal number of sites in artificial pelagic multisite fisheries. Canadian Journal of Fisheries and Aquatic Sciences 67(2): 296&#8211;303.<br>
+<br>
+[22] <a href="http://dx.doi.org/10.1016/j.pocean.2009.07.044" target="_blank">Brochier T, Colas F, <b>Lett C</b>, Echevin V, Cubillos LA, Tam J, Chlaida M, Mullon C, Fr&eacute;on P (2009)</a>. Small pelagic fish reproductive strategies in upwelling systems: a natal homing evolutionary model to study environmental constraints. Progress in Oceanography 83(1&#8211;4): 261&#8211;269.<br>
+<br>
+[21] <a href="http://dx.doi.org/10.1016/j.pocean.2008.10.004" target="_blank">Brochier T, <b>Lett C</b>, Tam J, Fr&eacute;on P, Colas F, Ay&oacute;n P (2008)</a>. An individual-based model study of anchovy early life history in the northern Humboldt Current system. Progress in Oceanography 79(2&#8211;4): 313&#8211;325.<br>
+<br>
+[20] <a href="http://dx.doi.org/10.1007/s00265-008-0647-8" target="_blank">Mirabet V, Fr&eacute;on P, <b>Lett C</b> (2008)</a>. Factors affecting information transfer from knowledgeable to naive individuals in groups. Behavioral Ecology and Sociobiology 63(2): 159&#8211;171.<br>
+<br>
+[19] <a href="http://dx.doi.org/10.1093/plankt/fbn066" target="_blank">Brochier T, Ramzi A, <b>Lett C</b>, Machu E, Berraho A, Fr&eacute;on P, Hern&aacute;ndez-Le&oacute;n S (2008)</a>. Modelling sardine and anchovy ichthyoplankton transport in the Canary Current System. Journal of Plankton Research 30(10): 1133&#8211;1146.<br>
+<br>
+[18] <a href="http://www.scielo.org.za/pdf/sajs/v104n5-6/a0910406.pdf" target="_blank"><b>Lett C</b>, Mirabet V (2008)</a>. Modelling the dynamics of animal groups in motion. South African Journal of Science 104(5&#8211;6): 192&#8211;198.<br>
+<br>
+[17] <a href="http://dx.doi.org/10.1016/j.envsoft.2008.02.005" target="_blank"><b>Lett C</b>, Verley P, Mullon C, Parada C, Brochier T, Penven P, Blanke B (2008)</a>. A Lagrangian tool for modelling ichthyoplankton dynamics. Environmental Modelling & Software 23(9): 1210&#8211;1214.<br>
+<br>
+[16] <a href="http://dx.doi.org/10.1016/j.ecocom.2007.07.003" target="_blank">Nguyen-Huu T, Auger P, <b>Lett C</b>, Marv&agrave; M (2008)</a>. Emergence of global behaviour in a host-parasitoid model with density-dependent dispersal in a chain of patches. Ecological Complexity 5(1): 9&#8211;21.<br>
+<br>
+[15] <a href="http://dx.doi.org/10.3354/meps06982" target="_blank"><b>Lett C</b>, Veitch J, van der Lingen CD, Hutchings L (2007)</a>. Assessment of an environmental barrier to transport of ichthyoplankton from the southern to the northern Benguela ecosystems. Marine Ecology Progress Series 347: 247&#8211;259.<br>
+<br>
+[14] <a href="http://dx.doi.org/10.1016/j.jmarsys.2006.03.012" target="_blank"><b>Lett C</b>, Penven P, Ay&oacute;n P, Fr&eacute;on P (2007)</a>. Enrichment, concentration and retention processes in relation to anchovy (<i>Engraulis ringens</i>) eggs and larvae distributions in the northern Humboldt upwelling ecosystem. Journal of Marine Systems 64(1&#8211;4): 189&#8211;200.<br>
+<br>
+[13] <a href="http://dx.doi.org/10.1016/j.ecolmodel.2006.10.018" target="_blank">Mirabet V, Auger P, <b>Lett C</b> (2007)</a>. Spatial structures in simulations of animal grouping. Ecological Modelling 201(3&#8211;4): 468&#8211;476.<br>
+<br>
+[12] <a href="http://dx.doi.org/10.1111/j.1365-2419.2005.00392.x" target="_blank"><b>Lett C</b>, Roy C, Levasseur A, van der Lingen CD, Mullon C (2006)</a>. Simulation and quantification of enrichment and retention processes in the southern Benguela upwelling ecosystem. Fisheries Oceanography 15(5): 363&#8211;372.<br>
+ <br>
+[11] <a href="http://dx.doi.org/10.1016/j.ecolmodel.2006.03.025" target="_blank">Mchich R, Auger P, <b>Lett C</b> (2006)</a>. Effects of aggregative and solitary individual behaviors on the dynamics of predator-prey game models. Ecological Modelling 197(3&#8211;4): 281&#8211;289.<br>
+<br>
+[10] <a href="http://dx.doi.org/10.1016/j.jmarsys.2005.03.007" target="_blank">Miller DCM, Moloney CL, van der Lingen CD, <b>Lett C</b>, Mullon C, Field JG (2006)</a>. Modelling the effects of physical-biological interactions and spatial variability in spawning and nursery areas on transport and retention of sardine <i>Sardinops sagax</i> eggs and larvae in the southern Benguela ecosystem. Journal of Marine Systems 61(3&#8211;4): 212&#8211;229.<br>
+<br>
+[9] <a href="http://dx.doi.org/10.1016/j.mbs.2006.03.019" target="_blank">Nguyen-Huu T, <b>Lett C</b>, Auger P, Poggiale J-C (2006)</a>. Spatial synchrony in host-parasitoid models using aggregation of variables. Mathematical Biosciences 203(2): 204&#8211;221.<br>
+<br>
+[8] <a href="http://dx.doi.org/10.1016/j.ecolmodel.2006.03.035" target="_blank">Nguyen-Huu T, <b>Lett C</b>, Poggiale J-C, Auger P (2006)</a>. Effect of movement frequency on global host-parasitoid spatial dynamics with unstable local dynamics. Ecological Modelling 197(3&#8211;4): 290&#8211;295.<br>
+<br>
+[7] <a href="http://dx.doi.org/10.1111/j.0030-1299.2005.13492.x" target="_blank"><b>Lett C</b>, Auger P, Fleury F (2005)</a>. Effects of asymmetric dispersal and environmental gradients on the stability of host-parasitoid systems. Oikos 109(3): 603&#8211;613.<br>
+<br>
+[6] <a href="http://dx.doi.org/10.1016/j.tpb.2003.10.005" target="_blank"><b>Lett C</b>, Auger P, Gaillard J-M (2004)</a>. Continuous cycling of grouped vs. solitary strategy frequencies in a predator-prey model. Theoretical Population Biology 65(3): 263&#8211;270.<br>
+<br>
+[5] <a href="http://dx.doi.org/10.1016/S1631-0691%2803%2900115-X" target="_blank">Auger P, <b>Lett C</b> (2003)</a>. Integrative biology: linking levels of organization. Comptes Rendus Biologies 326(5): 517&#8211;522.<br>
+<br>
+[4] <a href="http://dx.doi.org/10.1006/jtbi.2003.3213" target="_blank"><b>Lett C</b>, Auger P, Bravo de la Parra R (2003)</a>. Migration frequency and the persistence of host-parasitoid interactions. Journal of Theoretical Biology 221(4): 639&#8211;654.<br>
+<br>
+[3] <a href="http://dx.doi.org/10.1016/S0304-3800%2899%2900090-3" target="_blank"><b>Lett C</b>, Silber C, Barret N (1999)</a>. Comparison of a cellular automata network and an individual-based model for the simulation of forest dynamics. Ecological Modelling 121(2&#8211;3): 277&#8211;293.<br>
+<br>
+[2] <a href="http://dx.doi.org/10.1080/07038992.1999.10874739" target="_blank"><b>Lett C</b>, Silber C, Dub&eacute; P, Walter J-M, Raffy M (1999)</a>. Forest dynamics: a spatial gap model simulated on a cellular automata network. Canadian Journal of Remote Sensing 25(4): 403&#8211;411.<br>
+<br>
+[1] <a href="http://dx.doi.org/10.1016/S0764-4469%2800%2986654-8" target="_blank"><b>Lett C</b>, Walter J-M (1999)</a>. Validation of an individual-based model of forest dynamics using self-thinning relationships. Comptes Rendus de l&#8217;Acad&eacute;mie des Sciences - Sciences de la Vie 322(10): 879&#8211;885.<br>
+<br>
+<h4>Books and chapters</h4>
+<a href="http://www.dunod.com/sciences-techniques/sciences-fondamentales/mathematiques/master-et-doctorat-capes-agreg/modelisation-mathematique-en-eco" target="_blank"><img src="Files/BookModelisationMathEcologie2.jpeg" width=100 height=141></a> <a href="http://www.editions.ird.fr/produit/341/9782709921701" target="_blank"><img src="Files/BookIRD.jpg" width=100 height=141></a> <a href="http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521884822" target="_blank"><img src="Files/BookSmallPelagic.jpg" width=100 height=141></a> <a href="http://www.amazon.co.jp/Biomathematics-Mechanics-International-Mathematical-Applications/dp/toc/4762504564" target="_blank"><img src="Files/BookGakuto.jpg" width=100 height=141></a>
+<br><br>
+[5] <a href="http://www.dunod.com/sciences-techniques/sciences-fondamentales/mathematiques/master-et-doctorat-capes-agreg/modelisation-mathematique-en-eco" target="_blank">Auger P, <b>Lett C</b>, Poggiale J-C (2015)</a>. Mod&eacute;lisation math&eacute;matique en &eacute;cologie, cours et exercices corrig&eacute;s, 2<sup>e</sup> &eacute;dition. Dunod Sciences Sup.<br>
+<br>
+[4] <a href="http://www.editions.ird.fr/produit/341/9782709921701" target="_blank">Cury P, Bertrand A, Bertrand S, <b>Lett C</b>, Weigel J-Y, Masski H, Andr&eacute;fou&euml;t S (2015)</a>. Chapitre 6. Oc&eacute;ans : les &eacute;cosyst&egrave;mes marins face au r&eacute;chauffement. In : Reinert M, Janicot S, Aubertin C, Bernoux M, Dounias E, Gu&eacute;gan J-F, Lebel T, Mazurek H, Sultan B, Sokona Y, Moatti J-P (eds), Changement climatique : quels d&eacute;fis pour le Sud ?, IRD &eacute;ditions, pp. 87&#8211;99.<br>
+<br>
+[3] <a>Auger P, <b>Lett C</b>, Poggiale J-C (2010)</a>. Mod&eacute;lisation math&eacute;matique en &eacute;cologie, cours et exercices corrig&eacute;s. Dunod Sciences Sup.<br>
+<br>
+[2] <a href="http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521884822" target="_blank"><b>Lett C</b>, Rose KA, Megrey BA (2009)</a>. Chapter 6. Biophysical models. In: Checkley DM, Alheit J, Oozeki Y, Roy C (eds), Climate change and small pelagic fish, Cambridge University Press, pp. 88&#8211;111.<br>
+<br>
+[1] <a href="http://www.cambridge.org/catalogue/catalogue.asp?isbn=9780521884822" target="_blank">Auger P, <b>Lett C</b>, Nguyen-Huu T (2009)</a>. Aggregation methods of time discrete models: review and application to host-parasitoid interactions. In: Abdulle A, Banasiak J, Damlamian A, Sango M (eds), Multiple scales problems in Biomathematics, Mechanics, Physics and Numerics, Gakuto International Series in Mathematical Sciences and Applications, Vol. 31, pp. 257&#8211;278.<br>
+<br>
+<h4>Ph.D. dissertations</h4>
+[12] <a href="https://www.theses.fr/2021SORUS266" target="_blank">Imzilen T (2021)</a> (partly in French). Analyse et mod&eacute;lisation des trajectoires des dispositifs &agrave; concentration de poissons d&eacute;rivants (DCP) dans les zones oc&eacute;aniques tropicales et estimation des risques associ&eacute;s à leur d&eacute;ploiement. Sorbonne Universit&eacute;. <a href="https://umr-marbec.fr/ceremonie-de-remise-du-diplome-de-doctorat-de-taha-imzilen-a-sorbonne-universite/" target="_blank">Graduation ceremony</a><br>
+<br>
+[11] <a href="https://www.theses.fr/2021SORUS185" target="_blank">Amemou H (2021)</a>  (partly in French). Mod&eacute;lisation biophysique de la dispersion et de la croissance des larves de sardinelles dans le Golfe de Guin&eacute;e. Sorbonne Universit&eacute; and Universit&eacute;  F&eacute;lix Houphou&euml;t-Boigny, Abidjan, Ivory Coast.<br>
+<br>
+[10] <a href="https://archimer.ifremer.fr/doc/00472/58347" target="_blank">Lagarde F (2018)</a> (partly in French, pdf file 2 Mb). &Eacute;cologie de la reproduction de l’hu&icirc;tre <i>Crassostrea gigas</i> en lagune méditerranéenne. Sorbonne Universit&eacute;. <a href="https://youtu.be/oWyG8hNzERg" target="_blank">Overview</a><br>
+<br>
+[9] <a href="https://open.uct.ac.za/handle/11427/15609" target="_blank">Malauene BS (2015)</a>  (pdf file 46 Mb). Environmental influences on banana shrimps of the Sofala Bank, Mozambique Channel. University of Cape Town, South Africa.<br>
+<br>
+[8] <a href="https://tel.archives-ouvertes.fr/tel-01165031" target="_blank">Cuif M (2014)</a> (partly in French, pdf file 9 Mb). Combinaison de la modélisation biophysique et de marquages isotopiques pour estimer la connectivité démographique des populations marines : application à <i>Dascyllus aruanus</i> dans le lagon sud-ouest de Nouvelle-Calédonie. Universit&eacute; Pierre et Marie Curie.<br>
+<br>
+[7] <a href="./Files/Garavelli2013.pdf" target="_blank">Garavelli L (2013)</a> (partly in French, pdf file 6 Mb). &Eacute;tude de la connectivit&eacute; larvaire pour la gestion des ressources marines : application au gast&eacute;ropode <i>Concholepas concholepas</i> ("loco") au Chili. Universit&eacute; Pierre et Marie Curie and Universidad Cat&oacute;lica del Norte, Coquimbo, Chile.<br>
+<br>
+[6] <a href="./Files/Martins2009.pdf" target="_blank">Martins RS (2009)</a> (pdf file 3 Mb). Some factors influencing the transport of chokka squid (<i>Loligo reynaudii</i> d'Orbigny, 1839) paralarvae off the Eastern Cape, South Africa. University of Cape Town, South Africa.<br>
+<br>
+[5] <a href="./Files/Brochier2009.pdf" target="_blank">Brochier T (2009)</a> (partly in French, pdf file 9 Mb). Strat&eacute;gie de reproduction des petits poissons p&eacute;lagiques dans les zones d&rsquo;upwelling : une approche par mod&eacute;lisation individu-centr&eacute;e appliqu&eacute;e aux syst&egrave;mes de courants de Humboldt et des Canaries. Universit&eacute; Paris VI.<br>
+<br>
+[4] <a href="./Files/Mirabet2007.pdf" target="_blank">Mirabet V (2007)</a> (in French, pdf file 5 Mb). Mod&eacute;lisation individu-centr&eacute;e de la dynamique des groupes d'animaux et applications aux bancs de poissons. Universit&eacute; Lyon I.<br>
+<br>
+[3] <a href="./Files/Kone2006.pdf" target="_blank">Kon&eacute; V (2006)</a> (in French, pdf file 10.9 Mb). Mod&eacute;lisation de la production primaire et secondaire de l&#8217;&eacute;cosyst&egrave;me du Benguela sud. Influence des conditions trophiques sur le recrutement des larves d&#8217;anchois. Universit&eacute; Paris VI.<br>
+<br>
+[2] <a href="./Files/Miller2006.pdf" target="_blank">Miller DCM (2006)</a> (pdf file 4 Mb). An individual-based modelling approach to examine life history strategies of sardine (<i>Sardinops sagax</i>) in the southern Benguela ecosystem. University of Cape Town, South Africa.<br>
+<br>
+[1] <a href="./Files/Lett1999.pdf" target="_blank"><b>Lett C</b> (1999)</a> (in French, pdf file 2.8 Mb). Mod&eacute;lisation et simulation de la dynamique des &eacute;cosyst&egrave;mes forestiers : des mod&egrave;les agr&eacute;g&eacute;s aux mod&egrave;les individuels spatialis&eacute;s. Universit&eacute; Strasbourg I.
+<br>
+<br>
+
+<h3 id="Contact">Contact</h3>
+<img src="Files/LettAddressTransparent.jpg" alt="">
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
